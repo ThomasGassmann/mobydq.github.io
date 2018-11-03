@@ -24,8 +24,8 @@ description: Official documentation
 # List of links in the navigation bar
 navbar-links:
   Home: "index"
-  Getting Started: "gettingstarted"
-  Concepts:
+  Getting Started: "pages/gettingstarted"
+  Concepts: "pages/overview"
     - Overview: "pages/overview"
     - Data Sources: "pages/datasources"
     - Indicators: "pages/indicators"
