@@ -38,12 +38,13 @@ $ sudo apt install docker-compose
 
 # Setup Your Instance
 
-## Create Configuration File
-Based on the template below, create a text file named `.env` at the root of the project. This file is used by Docker Compose to load configuration parameters into environment variables. This is typically used to manage file paths, logins, passwords, etc. Make sure to update the `postgres` user password for both `POSTGRES_PASSWORD` and `DATABASE_URL` parameters.
+## Create Configuration Files
+Based on the template below, create a text file named `.env` at the root of the project. This file is used by Docker Compose to load configuration parameters into environment variables. This is typically used to manage file paths, logins, passwords, etc. Make sure to update the `postgres` user password for both `POSTGRES_PASSWORD` and `DATABASE_URL` parameters. Also make sure to update the values for the OAuth providers.
 
 ```ini
 # DB
 # Parameters used by db container
+POSTGRES_DB=mobydq
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=password
 
@@ -62,15 +63,21 @@ MAIL_SENDER=change@me.com
 NODE_ENV=development
 REACT_APP_FLASK_API_HOST=http://localhost:5434
 
-# OAuth
-
-# General OAuth Settings
-AFTER_LOGIN_REDIRECT=http://localhost
+# OAUTH
+# Global OAuth parameters used by web app
 TOKEN_ISSUER=https://localhost
+AFTER_LOGIN_REDIRECT=http://localhost
 
-# Google OAuth Provider
-GOOGLE_CLIENT_ID=client_id
-GOOGLE_CLIENT_SECRET=client_secret
+# GITHUB
+# Github OAuth parameters
+GITHUB_CLIENT_ID=change_me
+GITHUB_CLIENT_SECRET=change_me
+GITHUB_REDIRECT_URI=http://localhost:5434/mobydq/api/v1/security/oauth/github/callback
+
+# GOOGLE
+# Google OAuth parameters
+GOOGLE_CLIENT_ID=change_me
+GOOGLE_CLIENT_SECRET=change_me
 GOOGLE_REDIRECT_URI=http://localhost:5434/mobydq/api/v1/security/oauth/google/callback
 ```
 
@@ -82,16 +89,13 @@ $ openssl genrsa -out private.pem 2048 && openssl rsa -in private.pem -pubout > 
 ```
 
 ## Configure Authentication
-**Google**
-To delegate user authentication to Google, you must provide a client Id and secret key.
-1. Go to https://console.cloud.google.com/apis/credentials
-2. Create a new project in the Google Cloud Console
-3. Click `Create credentials`
-4. Select `OAuth client Id`
-5. Select `Web application`
-6. For `Authorized redirect URIs` add the URL specified in `GOOGLE_REDIRECT_URI` in your `.env` file
-7. Click `Create`
-8. Copy the client Id to `GOOGLE_CLIENT_ID` and the secret key to `GOOGLE_CLIENT_SECRET` in your `.env` file
+MobyDQ delegates user authentication to third parties such as Google or Github. Authentication is managed using **OAuth2** protocol so you should create an OAuth app on the website of the provider you want to use:
+* [Github](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app)
+* [Google](https://console.cloud.google.com/apis/credentials)
+
+Notes:
+* **Authorized redirect URIs** should contain the URI indicated in the `.env` file.
+* **Client Id** and **Client Secret** should be updated in the `.env` file.
 
 ## Create Docker Network
 This custom network is used to connect the different containers between each others. It is used in particular to connect the ephemeral containers ran when executing batches of indicators.
