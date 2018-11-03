@@ -44,6 +44,7 @@ Based on the template below, create a text file named `.env` at the root of the 
 ```ini
 # DB
 # Parameters used by db container
+POSTGRES_DB=mobydq
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=password
 
