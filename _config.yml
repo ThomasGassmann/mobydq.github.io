@@ -25,7 +25,7 @@ description: Official documentation
 navbar-links:
   Home: "index"
   Getting Started: "pages/gettingstarted"
-  Concepts: "pages/overview"
+  Concepts:
     - Overview: "pages/overview"
     - Data Sources: "pages/datasources"
     - Indicators: "pages/indicators"
