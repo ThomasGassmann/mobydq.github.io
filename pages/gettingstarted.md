@@ -38,7 +38,7 @@ $ sudo apt install docker-compose
 
 # Setup Your Instance
 
-## Create Configuration Files
+## Create Configuration File
 Based on the template below, create a text file named `.env` at the root of the project. This file is used by Docker Compose to load configuration parameters into environment variables. This is typically used to manage file paths, logins, passwords, etc. Make sure to update the `postgres` user password for both `POSTGRES_PASSWORD` and `DATABASE_URL` parameters. Also make sure to update the values for the OAuth providers.
 
 ```ini
