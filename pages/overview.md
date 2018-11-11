@@ -12,8 +12,8 @@ use-site-title: true
 
 
 # Concepts
-- [Data sources](/pages/datasources.md)
-- [Indicators](/pages/indicators.md)
-- [Batches and sessions](/pages/batchesandsessions.md)
-- [Users and user groups](/pages/usersandusergroups.md)
-- [Roles and permissions](/pages/rolesandpermissions.md)
+- [Data sources](/pages/datasources)
+- [Indicators](/pages/indicators)
+- [Batches and sessions](/pages/batchesandsessions)
+- [Users and user groups](/pages/usersandusergroups)
+- [Roles and permissions](/pages/rolesandpermissions)
