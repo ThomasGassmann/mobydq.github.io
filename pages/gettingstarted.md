@@ -43,46 +43,62 @@ Based on the template below, create a text file named `.env` at the root of the 
 
 ```ini
 # DB
-# Parameters used by db container
+# Parameters used by mobydq-db container to create the PostgreSQL database
 POSTGRES_DB=mobydq
 POSTGRES_USER=postgres
-POSTGRES_PASSWORD=password
+POSTGRES_PASSWORD=change_me
 
 # GRAPHQL
-DATABASE_URL=postgres://postgres:password@db:5432/mobydq
+# Parameters used by mobydq-graphql container to connect to the database
+DATABASE_URL=postgres://postgres:change_me@db:5432/mobydq
 
 # SCRIPTS
-# Parameters used by scripts container
+# Parameters used by mobydq-scripts container to connect to GraphQL API and send e-mails
 GRAPHQL_URL=http://graphql:5433/graphql
-MAIL_HOST=smtp.server.org
+MAIL_HOST=smtp.server.change_me.org
 MAIL_PORT=25
-MAIL_SENDER=change@me.com
+MAIL_SENDER=change_me@change_me.com
 
 # APP
-# Parameters used by app container
+# Parameters used by mobydq-app container
 NODE_ENV=development
-REACT_APP_FLASK_API_HOST=http://localhost:5434
+REACT_APP_FLASK_API_HOST=https://localhost:5434
 
-# OAUTH
 # Global OAuth parameters used by web app
 TOKEN_ISSUER=https://localhost
-AFTER_LOGIN_REDIRECT=http://localhost
+AFTER_LOGIN_REDIRECT=https://localhost
 
-# GITHUB
 # Github OAuth parameters
 GITHUB_CLIENT_ID=change_me
 GITHUB_CLIENT_SECRET=change_me
-GITHUB_REDIRECT_URI=http://localhost:5434/mobydq/api/v1/security/oauth/github/callback
+GITHUB_REDIRECT_URI=https://localhost:5434/mobydq/api/v1/security/oauth/github/callback
 
-# GOOGLE
 # Google OAuth parameters
 GOOGLE_CLIENT_ID=change_me
 GOOGLE_CLIENT_SECRET=change_me
-GOOGLE_REDIRECT_URI=http://localhost:5434/mobydq/api/v1/security/oauth/google/callback
+GOOGLE_REDIRECT_URI=https://localhost:5434/mobydq/api/v1/security/oauth/google/callback
+```
+
+## Create Self-Signed Certificate
+The Flask API and the web app are served by an Nginx web server with SSL encryption (https). In order to encrypt http requests when running the project locally, you must generate a self-signed certificate and its corresponding private key. The SSL encryption is required to be able to use OAuth authentication with Google or Github accounts. Execute the following command from root of the repository.
+```shell
+$ cd mobydq
+$ openssl req -x509 -newkey rsa:4096 -nodes -out ./nginx/config/cert.pem -keyout ./nginx/config/key.pem -days 365
+```
+You will be prompted a couple of questions which you can answer as follow.
+```shell
+[...]
+Country Name (2 letter code) [AU]:CN
+State or Province Name (full name) [Some-State]:Shanghai
+Locality Name (eg, city) []:Shanghai
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:MobyDQ
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:localhost
+Email Address []:
 ```
 
 ## Create Public & Private Keys
-Public and private keys are need to sign the JSON Web Token used by the web app when sending http requests to the Flask API. Execute the following command from root of the repository.
+Public and private keys are need to sign the JSON Web Token used by the web app when sending http requests to the Flask API. To generate the keys, execute the following command from the root of the repository.
 ```shell
 $ cd mobydq
 $ openssl genrsa -out private.pem 2048 && openssl rsa -in private.pem -pubout > public.pem
@@ -124,8 +140,8 @@ $ docker-compose up -d db graphql api app
 ```
 
 Individual components can be accessed at the following addresses:
-* Web application: `http://localhost`
-* Flask API Swagger Documentation: `http://localhost:5434/mobydq/api/doc`
+* Web application: `https://localhost`
+* Flask API Swagger Documentation: `https://localhost:5434/mobydq/api/doc`
 * GraphiQL Documentation: `http://localhost:5433/graphiql`
 * PostgreSQL database `host: localhost`, `port: 5432`
 

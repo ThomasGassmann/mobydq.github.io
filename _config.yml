@@ -25,7 +25,9 @@ description: Official documentation
 navbar-links:
   Home: "index"
   Demo: "pages/demo"
-  Getting Started: "pages/gettingstarted"
+  User Guides:
+    - Getting Started: "pages/gettingstarted"
+    - Production Deployment : "pages/productiondeployment"
   Concepts:
     - Overview: "pages/overview"
     - Data Sources: "pages/datasources"
