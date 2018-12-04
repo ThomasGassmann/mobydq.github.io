@@ -80,14 +80,13 @@ GOOGLE_REDIRECT_URI=https://localhost:5434/mobydq/api/v1/security/oauth/google/c
 ```
 
 ## Create Self-Signed Certificate
-The Flask API and the web app are served by an Nginx web server with SSL encryption (https). In order to encrypt http requests when running the project locally, you must generate a self-signed certificate and its corresponding private key. The SSL encryption is required to be able to use OAuth authentication with Google or Github accounts. Execute the following command from root of the repository.
+The Flask API and the web app are served by an Nginx web server with SSL encryption (https). In order to encrypt http requests when running the project locally, you must generate a self-signed certificate and its corresponding private key. The SSL encryption is required to be able to use OAuth authentication with Google or Github accounts. Execute the following command from the root of the repository.
 ```shell
 $ cd mobydq
 $ openssl req -x509 -newkey rsa:4096 -nodes -out ./nginx/config/cert.pem -keyout ./nginx/config/key.pem -days 365
 ```
 You will be prompted a couple of questions which you can answer as follow.
-```shell
-[...]
+```
 Country Name (2 letter code) [AU]:CN
 State or Province Name (full name) [Some-State]:Shanghai
 Locality Name (eg, city) []:Shanghai
