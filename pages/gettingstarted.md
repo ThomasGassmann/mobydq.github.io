@@ -62,7 +62,7 @@ MAIL_SENDER=change_me@change_me.com
 # APP
 # Parameters used by mobydq-app container
 NODE_ENV=development
-REACT_APP_FLASK_API_HOST=https://localhost:5434
+REACT_APP_FLASK_API_HOST=https://localhost
 
 # Global OAuth parameters used by web app
 TOKEN_ISSUER=https://localhost
@@ -71,12 +71,12 @@ AFTER_LOGIN_REDIRECT=https://localhost
 # Github OAuth parameters
 GITHUB_CLIENT_ID=change_me
 GITHUB_CLIENT_SECRET=change_me
-GITHUB_REDIRECT_URI=https://localhost:5434/mobydq/api/v1/security/oauth/github/callback
+GITHUB_REDIRECT_URI=https://localhost/mobydq/api/v1/security/oauth/github/callback
 
 # Google OAuth parameters
 GOOGLE_CLIENT_ID=change_me
 GOOGLE_CLIENT_SECRET=change_me
-GOOGLE_REDIRECT_URI=https://localhost:5434/mobydq/api/v1/security/oauth/google/callback
+GOOGLE_REDIRECT_URI=https://localhost/mobydq/api/v1/security/oauth/google/callback
 ```
 
 ## Create Self-Signed Certificate
@@ -140,7 +140,7 @@ $ docker-compose up -d db graphql api app
 
 Individual components can be accessed at the following addresses:
 * Web application: `https://localhost`
-* Flask API Swagger Documentation: `https://localhost:5434/mobydq/api/doc`
+* Flask API Swagger Documentation: `https://localhost/mobydq/api/doc`
 * GraphiQL Documentation: `http://localhost:5433/graphiql`
 * PostgreSQL database `host: localhost`, `port: 5432`
 

@@ -50,7 +50,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d graphql
 The Flask API is built on top of GraphQL in order to centralize custom operations performed by the application. For instance to manage permissions, encryption, trigger the execution of indicators, etc. It is built using [Python 3.6.6](https://www.python.org) and is powered by [Flask](http://flask.pocoo.org) and [Flask-Restplus](https://flask-restplus.readthedocs.io).
 
 
-The API runs into an independent Docker container named `mobydq-api`. When running the project locally, it is accessible on [http://localhost:5434/mobydq/api/doc](http://localhost:5434/mobydq/api/doc).
+The API runs into an independent Docker container named `mobydq-api`. When running the project locally, it is accessible on [http://localhost/mobydq/api/doc](http://localhost/mobydq/api/doc).
 
 
 ---
